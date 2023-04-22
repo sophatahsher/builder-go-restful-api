@@ -3,7 +3,7 @@ package model
 import (
 	"time"
 
-	util "builder/web-service-gin/utils"
+	util "builder/restful-api-gogin/utils"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"

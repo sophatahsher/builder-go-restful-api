@@ -1,7 +1,7 @@
 package loginModel
 
 import (
-	model "builder/web-service-gin/application/models"
+	model "builder/restful-api-gogin/application/models"
 )
 
 type Service interface {

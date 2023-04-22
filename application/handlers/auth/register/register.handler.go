@@ -1,12 +1,11 @@
 package handlerRegister
 
 import (
-	registerModel "builder/web-service-gin/application/controllers/auth/register"
-	util "builder/web-service-gin/utils"
+	registerModel "builder/restful-api-gogin/application/controllers/auth/register"
+	util "builder/restful-api-gogin/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	gpc "github.com/restuwahyu13/go-playground-converter"
 	"github.com/sirupsen/logrus"
 )
 
@@ -22,49 +21,49 @@ func (h *handler) RegisterHandler(ctx *gin.Context) {
 
 	var input registerModel.InputRegister
 	ctx.ShouldBindJSON(&input)
+	/*
+		config := gpc.ErrorConfig{
+			Options: []gpc.ErrorMetaConfig{
+				gpc.ErrorMetaConfig{
+					Tag:     "required",
+					Field:   "Fullname",
+					Message: "fullname is required on body",
+				},
+				gpc.ErrorMetaConfig{
+					Tag:     "lowercase",
+					Field:   "Fullname",
+					Message: "fullname must be using lowercase",
+				},
+				gpc.ErrorMetaConfig{
+					Tag:     "required",
+					Field:   "Email",
+					Message: "email is required on body",
+				},
+				gpc.ErrorMetaConfig{
+					Tag:     "email",
+					Field:   "Email",
+					Message: "email format is not valid",
+				},
+				gpc.ErrorMetaConfig{
+					Tag:     "required",
+					Field:   "Password",
+					Message: "password is required on body",
+				},
+				gpc.ErrorMetaConfig{
+					Tag:     "gte",
+					Field:   "Password",
+					Message: "password minimum must be 8 character",
+				},
+			},
+		}
 
-	config := gpc.ErrorConfig{
-		Options: []gpc.ErrorMetaConfig{
-			gpc.ErrorMetaConfig{
-				Tag:     "required",
-				Field:   "Fullname",
-				Message: "fullname is required on body",
-			},
-			gpc.ErrorMetaConfig{
-				Tag:     "lowercase",
-				Field:   "Fullname",
-				Message: "fullname must be using lowercase",
-			},
-			gpc.ErrorMetaConfig{
-				Tag:     "required",
-				Field:   "Email",
-				Message: "email is required on body",
-			},
-			gpc.ErrorMetaConfig{
-				Tag:     "email",
-				Field:   "Email",
-				Message: "email format is not valid",
-			},
-			gpc.ErrorMetaConfig{
-				Tag:     "required",
-				Field:   "Password",
-				Message: "password is required on body",
-			},
-			gpc.ErrorMetaConfig{
-				Tag:     "gte",
-				Field:   "Password",
-				Message: "password minimum must be 8 character",
-			},
-		},
-	}
+		errResponse, errCount := util.GoValidator(input, config.Options)
 
-	errResponse, errCount := util.GoValidator(input, config.Options)
-
-	if errCount > 0 {
-		util.ValidatorErrorResponse(ctx, http.StatusBadRequest, http.MethodPost, errResponse)
-		return
-	}
-
+		if errCount > 0 {
+			util.ValidatorErrorResponse(ctx, http.StatusBadRequest, http.MethodPost, errResponse)
+			return
+		}
+	*/
 	resultRegister, errRegister := h.service.RegisterService(&input)
 
 	switch errRegister {

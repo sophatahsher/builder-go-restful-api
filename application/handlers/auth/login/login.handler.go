@@ -1,17 +1,24 @@
 package handlerLogin
 
 import (
-	loginModel "builder/web-service-gin/application/controllers/auth/login"
-	//util "builder/web-service-gin/utils"
+	loginModel "builder/restful-api-gogin/application/controllers/auth/login"
+	"fmt"
+
+	//util "builder/restful-api-gogin/utils"
 	//"net/http"
 
 	"github.com/gin-gonic/gin"
-	//gpc "github.com/restuwahyu13/go-playground-converter"
+	gpc "github.com/restuwahyu13/go-playground-converter"
 	//"github.com/sirupsen/logrus"
 )
 
 type handler struct {
 	service loginModel.Service
+}
+
+type Login struct {
+	Email    string `validate:"required" gpc:"required=Email tidak boleh kosong"`
+	Password string `validate:"required" gpc:"required=Password tidak boleh kosong"`
 }
 
 func NewHandlerLogin(service loginModel.Service) *handler {
@@ -20,30 +27,37 @@ func NewHandlerLogin(service loginModel.Service) *handler {
 
 func (h *handler) LoginHandler(ctx *gin.Context) {
 
-	var input loginModel.InputLogin
-	ctx.ShouldBindJSON(&input)
+	//var input loginModel.InputLogin
+	//ctx.ShouldBindJSON(&input)
+
+	// config := gpc.ErrorConfig{
+	// 	Options: []gpc.ErrorMetaConfig{
+	// 		gpc.ErrorMetaConfig{
+	// 			Tag:     "required",
+	// 			Field:   "Email",
+	// 			Message: "email is required on body",
+	// 		},
+	// 		gpc.ErrorMetaConfig{
+	// 			Tag:     "email",
+	// 			Field:   "Email",
+	// 			Message: "email format is not valid",
+	// 		},
+	// 		gpc.ErrorMetaConfig{
+	// 			Tag:     "required",
+	// 			Field:   "Password",
+	// 			Message: "password is required on body",
+	// 		},
+	// 	},
+	// }
+	payload := Login{Email: "", Password: ""}
+	errResponse, errCount := gpc.Validator(payload)
+	if errCount != nil {
+		panic(errCount)
+	}
+
+	fmt.Println(errResponse) // if not errors, validator return nil value
 
 	/*
-		config := gpc.ErrorConfig{
-			Options: []gpc.ErrorMetaConfig{
-				gpc.ErrorMetaConfig{
-					Tag:     "required",
-					Field:   "Email",
-					Message: "email is required on body",
-				},
-				gpc.ErrorMetaConfig{
-					Tag:     "email",
-					Field:   "Email",
-					Message: "email format is not valid",
-				},
-				gpc.ErrorMetaConfig{
-					Tag:     "required",
-					Field:   "Password",
-					Message: "password is required on body",
-				},
-			},
-		}
-
 		errResponse, errCount := util.GoValidator(&input, config.Options)
 
 		if errCount > 0 {

@@ -1,7 +1,7 @@
 package registerModel
 
 import (
-	model "builder/web-service-gin/application/models"
+	model "builder/restful-api-gogin/application/models"
 
 	"gorm.io/gorm"
 )

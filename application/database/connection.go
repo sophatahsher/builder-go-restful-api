@@ -1,7 +1,7 @@
 package database
 
 import (
-	util "builder/web-service-gin/utils"
+	util "builder/restful-api-gogin/utils"
 	"os"
 
 	"github.com/sirupsen/logrus"

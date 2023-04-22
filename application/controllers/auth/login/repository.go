@@ -1,8 +1,8 @@
 package loginModel
 
 import (
-	model "builder/web-service-gin/application/models"
-	util "builder/web-service-gin/utils"
+	model "builder/restful-api-gogin/application/models"
+	util "builder/restful-api-gogin/utils"
 
 	"gorm.io/gorm"
 )

@@ -1,10 +1,10 @@
-package routeAuth
+package route
 
 import (
-	loginModel "builder/web-service-gin/application/controllers/auth/login"
-	registerModel "builder/web-service-gin/application/controllers/auth/register"
-	handlerLogin "builder/web-service-gin/application/handlers/auth/login"
-	handlerRegister "builder/web-service-gin/application/handlers/auth/register"
+	loginModel "builder/restful-api-gogin/application/controllers/auth/login"
+	registerModel "builder/restful-api-gogin/application/controllers/auth/register"
+	handlerLogin "builder/restful-api-gogin/application/handlers/auth/login"
+	handlerRegister "builder/restful-api-gogin/application/handlers/auth/register"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -26,7 +26,7 @@ func InitRoutes(db *gorm.DB, route *gin.Engine) {
 	/**
 	@description All Auth Route
 	*/
-	groupRoute := route.Group("/api/v1")
+	groupRoute := route.Group("/api/v1/login")
 	groupRoute.POST("/register", registerHandler.RegisterHandler)
 	groupRoute.POST("/login", loginHandler.LoginHandler)
 
